@@ -84,7 +84,9 @@ class Find_text():
 
         return new_name, new_dir
 
-class Formating_file(Find_text):
+class Formating_file():
+    def __init__(self, file_name=None):
+        self.file_name = file_name
 
     def check_width(self, word, count, result):
         if len(word) > 80:
@@ -101,7 +103,7 @@ class Formating_file(Find_text):
     def width_of_string(self):
         count = 0
         result = ''
-        with open(self.new_dir + self.new_name, 'r', encoding='utf-8') as f:
+        with open(self.file_name, 'r', encoding='utf-8') as f:
             text = f.read()
 
         text = text.split(' ')
@@ -125,10 +127,10 @@ class Formating_file(Find_text):
                 continue
 
             count += len(i) + 1 # учитываем длины слова и пробел
-        with open(self.new_dir + self.new_name, 'w') as f: # перезапись файла в отформатировном фиде
+        with open(self.file_name, 'w') as f: # перезапись файла в отформатировном фиде
             f.write(result)
 
-        return print(f'Файл {self.new_name} отформатирован в удобный для чтения вид')
+        return print(f'Файл {self.file_name} отформатирован в удобный для чтения вид')
 
 
 

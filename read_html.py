@@ -94,7 +94,7 @@ class Formating_file(Find_text):
             result += word + ' '
         elif len(word) + count >= 80:
             result += '\n' + word + ' '
-            count = 0
+            count = len(word) + 1
 
         return result, count
 
@@ -114,6 +114,8 @@ class Formating_file(Find_text):
                         count = 0
                     elif j:
                         result, count = self.check_width(j, count, result)
+                        count += len(j) + 1
+
                 continue
 
             if len(i) + count < 80:  # если строка + новое слово меньше 80 символов, то запиываем
@@ -122,7 +124,7 @@ class Formating_file(Find_text):
                 result, count = self.check_width(i, count, result)
                 continue
 
-            count += len(i)
+            count += len(i) + 1 # учитываем длины слова и пробел
         with open(self.new_dir + self.new_name, 'w') as f: # перезапись файла в отформатировном фиде
             f.write(result)
 

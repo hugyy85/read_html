@@ -1,13 +1,15 @@
 import requests, sys, bs4, re, os
 from config import tags
 import pdb
-class Find_text():
+
+
+class Findtext():
     def __init__(self, url, file_name_setting=1):
         self.url = url
         self.file_name_setting = file_name_setting
         self.new_name, self.new_dir = self.rename_url()
 
-    # функция для поиска параграфов и загаловков
+    # функция для поиска параграфов и заголовков
     def find_text(self):
 
         response = requests.get(self.url)
@@ -17,10 +19,9 @@ class Find_text():
 
     # парсинг найденого и запись всего в файл
     def write_text_to_file(self, text):
-
         with open(self.new_dir + self.new_name, 'w', encoding='utf-8') as f:
             for i in text:
-                if i.string != None: # ели в тэге только строка
+                if i.string != None: # если в тэге только строка
                     f.write(i.string + '\n' + '\n')
 
                 else: # если есть что то помимо строки
@@ -46,14 +47,12 @@ class Find_text():
                         except:
                             pass
 
-
         print(f"Данные записаны в файл с именем {self.new_name}")
         return
 
     def del_html(self, name):
         a = name.partition('.')
         return a[0]
-
 
     # переименование имени файла
     def rename_url(self):
@@ -84,7 +83,8 @@ class Find_text():
 
         return new_name, new_dir
 
-class Formating_file():
+    
+class Formatingfile():
     def __init__(self, file_name=None):
         self.file_name = file_name
 
@@ -120,14 +120,14 @@ class Formating_file():
 
                 continue
 
-            if len(i) + count < 80:  # если строка + новое слово меньше 80 символов, то запиываем
+            if len(i) + count < 80:  # если строка + новое слово меньше 80 символов, то записываем
                 result, count = self.check_width(i, count, result)
             elif len(i) + count >= 80:  # если нет, то переносим это слово на следующую строку
                 result, count = self.check_width(i, count, result)
                 continue
 
-            count += len(i) + 1 # учитываем длины слова и пробел
-        with open(self.file_name, 'w') as f: # перезапись файла в отформатировном фиде
+            count += len(i) + 1 # учитываем длинну слова и пробел
+        with open(self.file_name, 'w') as f: # перезапись файла в отформатированом фиде
             f.write(result)
 
         return print(f'Файл {self.file_name} отформатирован в удобный для чтения вид')

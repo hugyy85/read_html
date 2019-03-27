@@ -1,5 +1,5 @@
 # read_html
-convert html file in txt without garbage
+convert html file in txt without garbage and in readble foramt
 -----------------------------------------------------------------------------------
 	Чтобы запустить скрипт, необходимо ввести в терминале python main.py ссылка_на_сайт
 Либо можно ввести python main.py, а ссылки, если их много, записать в специальную
